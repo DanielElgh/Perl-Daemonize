@@ -15,7 +15,7 @@ $SIG{TERM} = sub { $terminate = 1 };
 exit main(@ARGV);
 
 sub main {
-    print "This will appear on your screen before we daemonize and is demo application.\n";
+    print "This will appear on your screen before we daemonize and is printed by thedemo application itself.\n";
     my $name = 'overridden_name';
 
     daemonize($name, 2);
