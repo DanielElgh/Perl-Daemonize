@@ -3,7 +3,6 @@
 #
 package Daemonize;
 use POSIX qw(close setsid);
-use File::Basename;
 use Cwd qw(chdir);
 use warnings;
 use FindBin;
