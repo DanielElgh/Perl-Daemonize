@@ -27,9 +27,17 @@ sub setProcName {
 sub getProcName {
     my $pid = $_[0] // $$;
     my $file = "/proc/$pid/comm";
-    open my $fh, '<', $file or die("getProcName: Unable to open '$file': $!\n");
-    my $name = <$fh>;
-    close $fh;
+    my $name;
+    if (-e $file && open my $fh, '<', $file) {
+        $name = <$fh>;
+        close $fh;
+    }
+    if (!defined $name) {    
+        if (!-e $file) {
+            return '';
+        }
+        die("getProcName: comm-file exists but can not be read\n");
+    }
     chomp($name);
     return $name;
 }
